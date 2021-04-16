@@ -2,7 +2,7 @@
 
 class Emysqli{
 		public $conn;
-                private  $php_ver;
+        private  $php_ver;
                 
                 
 
@@ -51,7 +51,7 @@ class Emysqli{
 		// selectC is Using for check if column exist or no and to get number of selected rows
 		// SELECTC SYNTAX = $mysql->selectC(table[requierd], column[requierd], where[optional])
 		
-                public function selectC($table, $column, $where){
+                public function countRows($table, $column, $where){
 			if ($where == ""){
 				$sql = "SELECT ". $column . "FROM " . $table . " ";
 			} else {
@@ -70,7 +70,7 @@ class Emysqli{
 		// selectR is using for get a value of query after select nothing will happen but it will return a query value
 		// SELECTR SYNTAX = $mysql->selectR(table[requierd], column[requierd], where[optional])
 		// using for make a  accounts list or history or somthing like this
-		public function selectR($table, $column, $where){
+		public function select($table, $column, $where){
 			if ($where == ""){
 				$sql = "SELECT ". $column . "FROM " . $table . " ";
 			} else {
@@ -87,6 +87,7 @@ class Emysqli{
 		// insert is using for insert a values in sql and return a value of query
 		// most using for create account or add admin or somthin like this
 		// insert SYNTAX = $mysql->insert(table[requierd], column[requierd], values[requierd])
+		// Example $mysql->insert("accounts","user,pass","'Ahmed','Ahmed123'")
 		public function insert($table, $columns, $values){
 				$sql = "INSERT INTO $table ($columns) VALUES ($values)";
 			  if ($this->php_ver == 7){
@@ -98,8 +99,9 @@ class Emysqli{
 		}
 		// remove is using for delete a column in sql and return a value of query
 		// this is using for delete account or delete task or somthing like this
-		// remove SYNTAX = $mysql->remove(table[requierd], where[requierd])
-		public function remove($table, $where){
+		// remove SYNTAX = $mysql->delete(table[requierd], where[requierd])
+	// Example $mysql->delete("accounts","user='ahmed'")
+		public function delete($table, $where){
 
 				$sql = "DELETE FROM $table WHERE $where";
 
@@ -111,8 +113,8 @@ class Emysqli{
 			return $go;
 		}
 		// update is updating a value in sql and return value for query
-		// most using for change password change price or something like this
 	// update SYNTAX = $mysql->update(table[requierd], VALUES[requierd], where[requierd])
+	// Example $mysql->update("accounts","user='ahmed',pass='ahmed123'","user='ahmed'")
 		public function update($table, $values, $where){
 
 				$sql = "UPDATE $table SET $values WHERE $where";
@@ -124,6 +126,7 @@ class Emysqli{
 				return $go;
 
 		}
+		// Query function do sql Query and Return Value 
 		public function query($sql)
 		{
 			  if ($this->php_ver == 7){
